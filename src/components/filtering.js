@@ -1,20 +1,26 @@
-import {createComparison, defaultRules} from "../lib/compare.js";
+export function initFiltering(elements) {
+    const updateIndexes = (nextElements, indexes) => {
+        Object.keys(indexes).forEach((elementName) => {
+            const select = nextElements[elementName];
 
-const compare = createComparison(defaultRules);
+            if (!select) {
+                return;
+            }
 
-export function initFiltering(elements, indexes) {
-    Object.keys(indexes).forEach(elementName => {
-        elements[elementName].append(
-            ...Object.values(indexes[elementName]).map(name => {
+            const emptyOption = select.querySelector('option[value=""]')?.cloneNode(true);
+            const options = Object.values(indexes[elementName]).map((name) => {
                 const option = document.createElement('option');
                 option.value = name;
                 option.textContent = name;
-                return option;
-            })
-        );
-    });
 
-    return (data, state, action) => {
+                return option;
+            });
+
+            select.replaceChildren(...[emptyOption, ...options].filter(Boolean));
+        });
+    };
+
+    const applyFiltering = (query, state, action) => {
         if (action && action.name === 'clear') {
             const field = action.dataset.field;
             const input = action.parentElement.querySelector('input, select');
@@ -28,6 +34,18 @@ export function initFiltering(elements, indexes) {
             }
         }
 
-        return data.filter(row => compare(row, state));
-    }
+        const filter = {};
+
+        Object.values(elements).forEach((element) => {
+            if (['INPUT', 'SELECT'].includes(element.tagName) && element.value) {
+                filter[`filter[${element.name}]`] = element.value;
+            }
+        });
+
+        return Object.keys(filter).length
+            ? {...query, ...filter}
+            : query;
+    };
+
+    return {updateIndexes, applyFiltering};
 }

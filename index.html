@@ -1,17 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Table App</title>
 </head>
 <body>
-<main id="app" class="container">
-    <!-- Table content will be inserted here -->
-</main>
+<main id="app" class="container"></main>
 
-<!-- Search bar template -->
 <template id="search">
     <div class="search-bar">
         <label class="search-wrapper" data-name="searchField">
@@ -33,9 +30,7 @@
                 <button type="submit" name="sort" data-field="date" data-value="none" class="icon" data-name="sortByDate" aria-label="Sort by date"></button>
             </div>
         </div>
-        <div class="table-column" role="columnheader">
-            Customer
-        </div>
+        <div class="table-column" role="columnheader">Customer</div>
         <div class="table-column" role="columnheader">Seller</div>
         <div class="table-column" role="columnheader">
             <div class="sortable">
@@ -51,46 +46,37 @@
         <div class="table-column">
             <label class="filter-wrapper">
                 <input type="text" value="" class="input" placeholder="Search" name="date" data-name="searchByDate">
-                <button type="submit" name="clear" data-field="date" class="icon" aria-label="Filter by date"></button>
+                <button type="submit" name="clear" data-field="date" class="icon" aria-label="Clear date filter"></button>
             </label>
         </div>
         <div class="table-column">
             <label class="filter-wrapper">
                 <input type="text" value="" class="input" name="customer" placeholder="Search" data-name="searchByCustomer">
-                <button type="submit" name="clear" data-field="customer" class="icon" aria-label="Filter by customer"></button>
+                <button type="submit" name="clear" data-field="customer" class="icon" aria-label="Clear customer filter"></button>
             </label>
         </div>
         <div class="table-column">
             <label class="dropdown-select">
                 <select name="seller" data-name="searchBySeller" aria-label="Filter by seller">
-                    <option value="" selected>—</option>
+                    <option value="" selected>-</option>
                 </select>
             </label>
         </div>
         <div class="table-column">
             <div class="range-inputs">
-                <input type="text" class="input" placeholder="from" name="totalFrom" data-name="totalFrom"
-                       aria-label="Experience from">
-                <input type="text" class="input" placeholder="to" name="totalTo" data-name="totalTo"
-                       aria-label="Experience to">
+                <input type="text" class="input" placeholder="from" name="totalFrom" data-name="totalFrom" aria-label="Total from">
+                <input type="text" class="input" placeholder="to" name="totalTo" data-name="totalTo" aria-label="Total to">
             </div>
         </div>
     </div>
 </template>
 
-<!-- Table template -->
 <template id="table">
     <form name="table" class="table" style="--columns: 1fr 1fr 1fr 1fr" role="table" aria-label="Data table">
-        <!-- Header row -->
-        <!-- Filter row -->
-        <!-- Table content -->
-        <div class="table-content" data-name="rows" role="rowgroup">
-            <!-- Rows will be inserted here -->
-        </div>
+        <div class="table-content" data-name="rows" role="rowgroup"></div>
     </form>
 </template>
 
-<!-- Pagination template -->
 <template id="pagination">
     <div class="pagination-container">
         <div class="pagination-controls">
@@ -101,8 +87,7 @@
                 <i class="icon left" aria-hidden="true"></i>
             </button>
             <div class="pagination-pages" data-name="pages" role="group" aria-label="Page navigation">
-                <!-- Page buttons will be generated dynamically -->
-                <label class="pagination-button" aria-label="Goto page 1">
+                <label class="pagination-button" aria-label="Go to page 1">
                     <input type="radio" name="page" value="1">
                     <span>1</span>
                 </label>
@@ -132,7 +117,6 @@
     </div>
 </template>
 
-<!-- Row template -->
 <template id="row">
     <div class="table-row" role="row">
         <div class="table-column" data-name="date" role="cell"></div>
